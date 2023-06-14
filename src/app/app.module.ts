@@ -21,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegistrationEditComponent } from './registration-edit/registration-edit.component';
 import { RegistrationDetailComponent } from './registration-detail/registration-detail.component';
 import { RegistrationListComponent } from './registration-list/registration-list.component';
-import {EncrDecrService} from '../app/shared/EncrDecrService.service';
+import { EncrDecrService } from '../app/shared/EncrDecrService.service';
 import { AuthService } from './auth/auth.service';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { AuthGuard } from './auth/auth.guard';
@@ -38,8 +38,9 @@ import { OnlinepaymentComponent } from './onlinepayment/onlinepayment.component'
 //import { ReactiveFormEmailValidationComponent } from "./components/reactive-form-email-validation/reactive-form-email-validation.component";
 
 @NgModule({
-  declarations: [AppComponent,AppMenuComponent, HomeComponent, ProfileComponent, AboutComponent, HelpComponent, NotFoundComponent, LoginComponent, RegistrationComponent, RegistrationEditComponent, RegistrationDetailComponent, RegistrationListComponent, PaymentComponent, VoucherComponent, StaffpaymentComponent, PaymentDetailComponent, VoucherNewComponent, OutsourcedpaymentComponent, GuestpaymentComponent, OnlinepaymentComponent],
+  declarations: [AppComponent, AppMenuComponent, HomeComponent, ProfileComponent, AboutComponent, HelpComponent, NotFoundComponent, LoginComponent, RegistrationComponent, RegistrationEditComponent, RegistrationDetailComponent, RegistrationListComponent, PaymentComponent, VoucherComponent, StaffpaymentComponent, PaymentDetailComponent, VoucherNewComponent, OutsourcedpaymentComponent, GuestpaymentComponent, OnlinepaymentComponent],
   imports: [
+
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -52,10 +53,11 @@ import { OnlinepaymentComponent } from './onlinepayment/onlinepayment.component'
     FormsModule,
     HttpClientModule,
     AppMaterialModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+
 
   ],
-  providers: [EncrDecrService,AuthService,AuthGuard],
+  providers: [EncrDecrService, AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
