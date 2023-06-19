@@ -1,9 +1,12 @@
+
+
 <div class="signin-content">
   <mat-card>
     <mat-card-content>
       <img src="assets/images/logo.png" alt="Logo" class="logo-image" />
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <p>Please login to continue</p>
+        
         <mat-form-field class="full-width-input">
           <input
             matInput
@@ -31,6 +34,7 @@
         <button mat-raised-button routerLink="../registration">Register</button>
       </form>
       <a mat-button routerLink="../forgot-password">Forgot Password?</a>
+     
       <!-- Added forgot password link The routerLink attribute is used to navigate to the "forgot-password" route. Make sure you have defined the appropriate route in your routing configuration. Now, users will see a "Forgot Password" link below the login form, and clicking on it will take them to the "forgot-password" page or route.-->
     </mat-card-content>
     <div class="card-header">

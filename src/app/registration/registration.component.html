@@ -1,201 +1,169 @@
-<div class="card">
-  <div class="card-header">
-    {{ pageTitle }}
-  </div>
-  <div class="card-body">
-    <ng-container *ngIf="registrationForm">
-      <form novalidate (ngSubmit)="save()" [formGroup]="registrationForm">
-        <!-- Customer Type -->
+  <div class="card">
+    <div class="card-header">
+      {{ pageTitle }}
+    </div>
+    <div class="card-body">
+      <ng-container *ngIf="registrationForm">
+        <form novalidate (ngSubmit)="save()" [formGroup]="registrationForm">
+          <!-- Customer Type -->
 
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="customerTypeId"
-            >Customer Type</label
-          >
-          <div class="col-md-8">
-            <select
-              class="form-control"
-              id="customerTypeId"
-              formControlName="customerType"
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="custTypeId"
+              >Customer Type</label
             >
-              <option value="" selected>Select Customer Type</option>
-              <option value="staff">Staff</option>
-              <option value="outsourced">Outsourced</option>
-              <option value="guest">Guest</option>
-            </select>
+            <div class="col-md-8">
+              <select
+                class="form-control"
+                id="custTypeId"
+                formControlName="custTypeId"
+              >
+                <option value="" disabled selected>Select Customer Type</option>
+                <option *ngFor="let customerType of customerTypes" value={{customerType.id}}>{{ customerType.name }}</option>
+              </select>
+            </div>
           </div>
-        </div>
 
-        <!-- Staff ID -->
-        <div class="form-group row mb-2" *ngIf="isStaffOrOutsourced()">
-          <label class="col-md-2 col-form-label" for="staffId">Staff ID</label>
-          <div class="col-md-8">
-            <input
-              class="form-control"
-              id="staffId"
-              type="text"
-              placeholder="Staff ID"
-              formControlName="staffId"
-            />
-          </div>
-        </div>
-
-        <!-- Guest Phone Number -->
-        <div class="form-group row mb-2" *ngIf="isGuest()">
-          <label class="col-md-2 col-form-label" for="phoneNumber"
-            >Phone Number</label
-          >
-          <div class="col-md-8">
-            <input
-              class="form-control"
-              id="phoneNumber"
-              type="text"
-              placeholder="Phone Number"
-              formControlName="phoneNumber"
-            />
-          </div>
-        </div>
-     
+        <!-- Staff ID or Phone Number -->
+      
 
         <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="firstNameId"
-            >First Name</label
+          <label class="col-md-2 col-form-label" for="custId"
+            >Staff StaffID/PhoneNumber</label
           >
           <div class="col-md-8">
             <input
               class="form-control"
-              id="firstNameId"
+              id="custId"
               type="text"
               placeholder="First Name (required)"
-              formControlName="firstName"
+              formControlName="custId"
             />
           </div>
         </div>
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="lastNameId"
-            >Last Name</label
-          >
-          <div class="col-md-8">
-            <input
-              class="form-control"
-              id="lastNameId"
-              type="text"
-              placeholder="Last Name (required)"
-              formControlName="lastName"
-            />
-          </div>
-        </div>
+      
 
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="userNameId">Email</label>
-          <div class="col-md-8">
-            <input
-              class="form-control"
-              id="userNameId"
-              type="text"
-              placeholder="Email (required)"
-              formControlName="userName"
-              inputmode="email"
-              [class.is-invalid]="
-                registrationForm.get('userName')?.invalid &&
-                registrationForm.get('userName')?.touched
-              "
-            />
-            <div
-              *ngIf="submitted && registrationForm.get('userName')?.errors"
-              class="alert alert-danger"
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="firstNameId"
+              >First Name</label
             >
-              <div *ngIf="registrationForm.get('userName')?.errors">
-                Incorrect Email address
-              </div>
-            </div>
-            <!-- <div *ngIf="registrationForm.controls['userName']?.hasError('required')">
-                   Mail address is not <strong>valid.</strong>
-                  </div>
-                   <div *ngIf="(regEmail?.invalid && regEmail?.touched) || regEmail?.dirty">
-                   <small class="text-danger" *ngif="regEmail.errors?.pattern">Email address is required</small>
-                   <small class="text-danger" *ngif="regEmail.errors?.userName">Email address is invalid</small>
-                 </div>   -->
-          </div>
-        </div>
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="passwordId"
-            >Password</label
-          >
-          <div class="col-md-8">
-            <input
-              class="form-control"
-              id="passwordId"
-              type="password"
-              placeholder="Password (required)"
-              formControlName="password"
-            />
-            <div
-              *ngif="submitted && registrationForm.get('password').errors"
-              class="alert alert-danger"
-            >
-              <div *ngif="registrationForm.get('password').errors.required">
-                Password is required
-              </div>
+            <div class="col-md-8">
+              <input
+                class="form-control"
+                id="firstNameId"
+                type="text"
+                placeholder="First Name (required)"
+                formControlName="firstName"
+              />
             </div>
           </div>
-        </div>
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="retypepasswordId">Re-type Password</label>
-          <div class="col-md-8">
-            <input
-              class="form-control"
-              id="retypepasswordId"
-              type="password"
-              placeholder="Re-type Password (required)"
-              formControlName="confirmPassword"
-            />
-            <div *ngIf="submitted && registrationForm.get('confirmPassword')?.errors" class="alert alert-danger">
-              <div *ngIf="registrationForm.get('confirmPassword')?.errors">
-                Confirm Password is required
-              </div>
-              <div *ngIf="registrationForm.get('confirmPassword')?.errors">
-                Passsword and Confirm Password didn't match.
-              </div>
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="lastNameId"
+              >Last Name</label
+            >
+            <div class="col-md-8">
+              <input
+                class="form-control"
+                id="lastNameId"
+                type="text"
+                placeholder="Last Name (required)"
+                formControlName="lastName"
+              />
             </div>
-          </div>
-        </div>
-        <div class="form-group row mb-2">
-          <div class="offset-md-2 col-md-4">
-            <button
-              class="btn btn-primary mr-3"
-              type="submit"
-              style="width: 80px"
-            >
-              Save
-            </button>
-            <button
-              class="btn btn-outline-secondary mr-3"
-              style="width: 80px"
-              type="button"
-              title="Cancel your edits"
-              [routerLink]="['/registrations']"
-            >
-              Cancel
-            </button>
-            Already Registered?<a class="btn btn-link" [routerLink]="['/login']"
-              >Login</a
-            >
           </div>
 
-          <a
-            class="btn btn-link"
-            routerLink="/login"
-            {%
-            comment
-            %}
-            *ngIf="isRegistered()"
-            {%
-            endcomment
-            %}
-            >Login</a
-          >
-        </div>
-      </form>
-    </ng-container>
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="userNameId">Email</label>
+            <div class="col-md-8">
+              <input
+                class="form-control"
+                id="userNameId"
+                type="text"
+                placeholder="Email (required)"
+                formControlName="userName"
+                inputmode="email" [class.is-invalid]="registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched"/>
+              <div
+                *ngIf="submitted && registrationForm.get('userName')?.errors"
+                class="alert alert-danger"
+              >
+                <div *ngIf="registrationForm.get('userName')?.errors">
+                  Incorrect Email address
+                </div>
+              </div>
+              <!-- <div *ngIf="registrationForm.controls['userName']?.hasError('required')">
+                    Mail address is not <strong>valid.</strong>
+                    </div>
+                    <div *ngIf="(regEmail?.invalid && regEmail?.touched) || regEmail?.dirty">
+                    <small class="text-danger" *ngif="regEmail.errors?.pattern">Email address is required</small>
+                    <small class="text-danger" *ngif="regEmail.errors?.userName">Email address is invalid</small>
+                  </div>   -->
+            </div>
+          </div>
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="passwordId"
+              >Password</label
+            >
+            <div class="col-md-8">
+              <input
+                class="form-control"
+                id="passwordId"
+                type="password"
+                placeholder="Password (required)"
+                formControlName="password"
+              />
+              <div
+                *ngIf="submitted && registrationForm.get('password')?.errors"
+                class="alert alert-danger"
+              >
+                <div *ngIf="registrationForm.get('password')?.errors?.required">
+                  Password is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="retypepasswordId">Re-type Password</label>
+            <div class="col-md-8">
+              <input
+                class="form-control"
+                id="retypepasswordId"
+                type="password"
+                placeholder="Re-type Password (required)"
+                formControlName="confirmPassword"
+              />
+              <div *ngIf="submitted && registrationForm.get('confirmPassword')?.errors" class="alert alert-danger">
+                <div *ngIf="registrationForm.get('confirmPassword')?.errors">
+                  Confirm Password is required
+                </div>
+                <div *ngIf="registrationForm.get('confirmPassword')?.errors">
+                  Passsword and Confirm Password didn't match.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-2">
+            <div class="offset-md-2 col-md-4">
+              <button
+                class="btn btn-primary mr-3"
+                type="submit"
+                style="width: 80px"
+              >
+                Save
+              </button>
+              <button
+                class="btn btn-outline-secondary mr-3"
+                style="width: 80px"
+                type="button"
+                title="Cancel your edits"
+                [routerLink]="['/registrations']"
+              >
+                Cancel
+              </button>
+              Already Registered?<a class="btn btn-link" [routerLink]="['/login']"
+                >Login</a
+              >
+            </div>
+          </div>
+        </form>
+      </ng-container>
+    </div>
   </div>
-</div>

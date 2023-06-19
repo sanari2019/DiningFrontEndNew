@@ -6,6 +6,7 @@ html,
 body {
     height: 100%;
 }
+
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -18,22 +19,29 @@ h4,
 p {
     margin: 0;
 }
-.bg-img
-{
+
+.bg-img {
     background-image: url('/assets/images/dining.jpg');
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .logo-image {
-    width: 100px; /* Adjust the width as needed */
-    height: auto; /* Adjust the height as needed */
-    margin-bottom: 20px; /* Add margin-bottom for spacing */
+    width: 100px;
+    /* Adjust the width as needed */
+    height: auto;
+    /* Adjust the height as needed */
+    margin-bottom: 20px;
+    /* Add margin-bottom for spacing */
     margin-right: 20px;
     margin-top: 20px;
-  }
+}
 
-  button {
+button {
     margin-right: 10px;
 
-  }
+}
+
+.error {
+    color: red;
+}

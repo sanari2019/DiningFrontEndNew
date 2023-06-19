@@ -10,7 +10,10 @@
   <img src="assets/images/Evercare-Logo.jpg" alt="Logo" class="logo-image" />
   Dining Application
   <!-- <button mat-button id="btnloginuser" *ngIf="isLoggedIn$">{{'Welcome '+authService.registration?.firstName}}</button> -->
+  
   <div id="login">
+    
+   
     <button mat-button routerLink="login" *ngIf="!isLoggedIn$">Login</button>
     <!-- <button mat-button routerLink="registration" *ngIf="isLoggedIn$">Register</button> -->
     <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">
@@ -30,17 +33,20 @@
   >
     <button mat-button class="menu-button">
       <!--<mat-icon>Menu</mat-icon>-->
-      <span>Menu</span>
+     
+      <span>
+        Welcome, {{ authService.registration?.firstName }} 
+      </span>
     </button>
     <mat-divider></mat-divider>
     <!-- <button mat-button  class="menu-button" routerLink="/home"> -->
     <!--<mat-icon>Administration</mat-icon>-->
     <!-- <span>Home</span> -->
     <!-- </button> -->
-    <button mat-button class="menu-button" routerLink="/registrations">
+    <!--<button mat-button class="menu-button" routerLink="/registrations">-->
       <!--<mat-icon>Administration</mat-icon>-->
-      <span>Registration</span>
-    </button>
+      <!--<span>Registration</span>-->
+    <!--</button>-->
     <button mat-button class="menu-button" routerLink="/payment">
       <!--<mat-icon>Administration</mat-icon>-->
       <span>Payment</span>

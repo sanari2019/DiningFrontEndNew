@@ -19,10 +19,12 @@ import { VoucherNewComponent } from './voucher-new/voucher-new.component';
 import { OutsourcedpaymentComponent } from './outsourcedpayment/outsourcedpayment.component';
 import { GuestpaymentComponent } from './guestpayment/guestpayment.component';
 
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
 
 const routes: Routes = [
   {
-    path: '', component:HomeComponent, canActivate:[AuthGuard]
+    path: '', component: HomeComponent, canActivate: [AuthGuard]
     // pathMatch: 'full',
     // redirectTo: 'login',
   },
@@ -30,9 +32,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   {
     path: 'registrations',
-    component: RegistrationListComponent, canActivate:[AuthGuard]
+    component: RegistrationListComponent, canActivate: [AuthGuard]
   },
   {
     path: 'payment',
@@ -96,6 +99,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
